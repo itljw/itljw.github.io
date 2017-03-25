@@ -87,12 +87,30 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="JW's Notes">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="前言
+
+讲道理，到目前为止我还没有在项目中用过aidl(android interface definition language)，最近在看Android艺术开发探索这本书，发现aidl都基本没什么印象了，所以重新找资料学习一波。
+1、概述
+AIDL的全称是Android Interface Definition Language，也就是Android接口定义语言，设计这门语言的目的是为了实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIDL的学习">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/hello-world/index.html">
 <meta property="og:site_name" content="JW's Notes">
+<meta property="og:description" content="前言
+
+讲道理，到目前为止我还没有在项目中用过aidl(android interface definition language)，最近在看Android艺术开发探索这本书，发现aidl都基本没什么印象了，所以重新找资料学习一波。
+1、概述
+AIDL的全称是Android Interface Definition Language，也就是Android接口定义语言，设计这门语言的目的是为了实现">
+<meta property="og:image" content="http://yoursite.com/./favicon.png">
+<meta property="og:updated_time" content="2017-03-25T07:30:54.055Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JW's Notes">
+<meta name="twitter:title" content="AIDL的学习">
+<meta name="twitter:description" content="前言
+
+讲道理，到目前为止我还没有在项目中用过aidl(android interface definition language)，最近在看Android艺术开发探索这本书，发现aidl都基本没什么印象了，所以重新找资料学习一波。
+1、概述
+AIDL的全称是Android Interface Definition Language，也就是Android接口定义语言，设计这门语言的目的是为了实现">
+<meta name="twitter:image" content="http://yoursite.com/./favicon.png">
 
 
 
@@ -120,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/24/hello-world/"/>
 
 
 
 
 
-  <title> JW's Notes </title>
+  <title> AIDL的学习 | JW's Notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -151,9 +169,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,9 +262,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -278,10 +294,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/03/24/hello-world/" itemprop="url">
-                  AIDL的学习
-                </a>
+                AIDL的学习
               
             
           </h1>
@@ -354,8 +367,7 @@
       
 
       
-        
-          <blockquote>
+        <blockquote>
 <p>前言</p>
 </blockquote>
 <p>讲道理，到目前为止我还没有在项目中用过aidl(android interface definition language)，最近在看Android艺术开发探索这本书，发现aidl都基本没什么印象了，所以重新找资料学习一波。</p>
@@ -379,22 +391,35 @@
 </ul>
 </li>
 </ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/24/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<a id="more"></a>
+<h2 id="2、如何使用AIDL实现进程间通信？"><a href="#2、如何使用AIDL实现进程间通信？" class="headerlink" title="2、如何使用AIDL实现进程间通信？"></a>2、如何使用AIDL实现进程间通信？</h2><ul>
+<li><p>1、让实体类实现Parcelable接口</p>
+<ul>
+<li><p>由于不同的进程有着不同的内存区域，并且它们只能访问自己的那一块内存区域，所以我们必须将要传输的数据转化为能够在内存之间流通哦的形式，这个转化过程就叫做序列化和反序列化。而序列化的方式就是实现Parcelable接口。</p>
+<p><strong>注：若AIDL文件中涉及到的所有数据类型均为默认支持的数据类型，则无此操作。因为默认支持的那些数据都是可序列化的。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">package com.itljw.aidldemo;</div><div class="line"></div><div class="line">import android.os.Parcel;</div><div class="line">import android.os.Parcelable;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by JW on on 2017/3/24 16:29.</div><div class="line"> * Email : 1481013718@qq.com</div><div class="line"> * Description :</div><div class="line"> */</div><div class="line">public class Book implements Parcelable &#123;</div><div class="line"></div><div class="line"></div><div class="line">    private String name;</div><div class="line">    private int price;</div><div class="line"></div><div class="line">    public Book()&#123;&#125;</div><div class="line"></div><div class="line">    public Book(Parcel in) &#123;</div><div class="line">        name = in.readString();</div><div class="line">        price = in.readInt();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static final Creator&lt;Book&gt; CREATOR = new Creator&lt;Book&gt;() &#123;</div><div class="line">        @Override</div><div class="line">        public Book createFromParcel(Parcel in) &#123;</div><div class="line">            return new Book(in);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public Book[] newArray(int size) &#123;</div><div class="line">            return new Book[size];</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    public String getName() &#123;</div><div class="line">        return name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setName(String name) &#123;</div><div class="line">        this.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getPrice() &#123;</div><div class="line">        return price;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setPrice(int price) &#123;</div><div class="line">        this.price = price;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;Book&#123;&quot; +</div><div class="line">                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +</div><div class="line">                &quot;, price=&quot; + price +</div><div class="line">                &apos;&#125;&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int describeContents() &#123;</div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void writeToParcel(Parcel parcel, int i) &#123;</div><div class="line">        parcel.writeString(name);</div><div class="line">        parcel.writeInt(price);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 参数是一个Parcel,用它来存储与传输数据</div><div class="line">     * @param dest</div><div class="line">     */</div><div class="line">    public void readFromParcel(Parcel dest)&#123;</div><div class="line">        //注意，此处的读值顺序应当是和writeToParcel()方法中一致的</div><div class="line">        name = dest.readString();</div><div class="line">        price = dest.readInt();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>2、创建和aidl文件</p>
+</li>
+</ul>
+<h2 id="个人信息"><a href="#个人信息" class="headerlink" title="个人信息"></a>个人信息</h2><p>图片：<img src="./favicon.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
@@ -403,21 +428,22 @@
       
 
       
-
+        
       
 
       
+
       
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -425,6 +451,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -444,8 +474,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -498,6 +537,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、概述"><span class="nav-number">1.</span> <span class="nav-text">1、概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、如何使用AIDL实现进程间通信？"><span class="nav-number">2.</span> <span class="nav-text">2、如何使用AIDL实现进程间通信？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人信息"><span class="nav-number">3.</span> <span class="nav-text">个人信息</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -610,6 +665,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
